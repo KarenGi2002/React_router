@@ -10,6 +10,7 @@ import Index from './routes/index';
 import { RouterProvider } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import "./index.css";
+// ...
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,25 +29,27 @@ const router = createBrowserRouter([
             loader: contactLoader,
             action: contactAction,
           },
-      {
-        path: "contacts/:contactId/edit",
-        element: <EditContact />,
-        loader: contactLoader,
-        action: editAction,
+          {
+            path: "contacts/:contactId/edit",
+            element: <EditContact />,
+            loader: contactLoader,
+            action: editAction,
+          },
+          {
+            path: "contacts/:contactId/destroy",
+            action: destroyAction,
+            errorElement: <div>Oops! There was an error.</div>,
+          },
+        ],
       },
-      {
-        path: "contacts/:contactId/destroy",
-        action: destroyAction,
-        errorElement: <div>Oops! There was an error.</div>,
-      },
-      ],
-    },
-  ],
-},
+    ],
+  },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <RouterProvider router={router}>
+      <Root />
+    </RouterProvider>
   </React.StrictMode>
 );
